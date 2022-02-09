@@ -1,20 +1,20 @@
-package com.example.demo.entity;
+package com.example.demo.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
-@Entity
-public class ToDo {
+public class UpdateDescriptionDto {
 
-    @Id
-    @GeneratedValue
+    @NotNull
     private Long id;
 
+    @NotBlank(message = "description is mandatory")
     private String description;
-    private Boolean isDone = false;
 
-    public ToDo() {
+    @NotNull
+    private Boolean isDone;
+
+    public UpdateDescriptionDto() {
     }
 
     public Long getId() {
