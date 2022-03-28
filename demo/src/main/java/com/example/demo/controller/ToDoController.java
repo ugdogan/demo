@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.aspects.MonitorTime;
 import com.example.demo.dto.CreateDescriptionDto;
 import com.example.demo.dto.UpdateDescriptionDto;
 import com.example.demo.entity.ToDo;
@@ -22,6 +23,7 @@ public class ToDoController {
     @Autowired
     public ToDoServiceImpl toDoService;
 
+    @MonitorTime
     @GetMapping("/{id}")
     public ResponseEntity<List<ToDo>> readToDo(@PathVariable("id") Long id){
         return new ResponseEntity<>(toDoService.readToDo(id), HttpStatus.ACCEPTED);
