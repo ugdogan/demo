@@ -6,6 +6,7 @@ import com.example.demo.entity.ToDo;
 import com.example.demo.service.ToDoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -27,23 +28,24 @@ public class ToDoController {
     }
 
     @GetMapping
-    public List<ToDo> readAllToDos(){
-        return toDoService.readAllToDos();
+    public ResponseEntity<List<ToDo>> readAllToDos(){
+        return new ResponseEntity<>(toDoService.readAllToDos(), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteToDo(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteToDo(@PathVariable("id") Long id) {
         toDoService.deleteToDo(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PostMapping
-    public ToDo createToDo(@Valid @RequestBody CreateDescriptionDto toDo) {
-        return toDoService.createToDo(toDo);
+    public ResponseEntity<ToDo> createToDo(@Valid @RequestBody CreateDescriptionDto toDo) {
+        return new ResponseEntity<>(toDoService.createToDo(toDo), HttpStatus.ACCEPTED);
     }
 
     @PutMapping
-    public ToDo updateToDo(@RequestBody UpdateDescriptionDto toDo) {
-        return toDoService.updateToDo(toDo);
+    public ResponseEntity<ToDo> updateToDo(@RequestBody UpdateDescriptionDto toDo) {
+        return new ResponseEntity<>(toDoService.updateToDo(toDo), HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/done")

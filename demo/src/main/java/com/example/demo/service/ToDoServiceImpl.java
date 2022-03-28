@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +27,9 @@ public class ToDoServiceImpl implements ToDoService {
 
     @Override
     public ToDo updateToDo(UpdateDescriptionDto toDo) {
-        ToDo oldToDo = toDoRepository.findById(toDo.getId()).orElseThrow();
+        ToDo oldToDo = toDoRepository.findById(toDo.getId()).orElseThrow(
+                () -> new EntityNotFoundException("TODO WURDE NICHT GEFUNDEN")
+        );
         modelMapper.map(toDo, oldToDo);
         return toDoRepository.save(oldToDo);
     }
