@@ -29,7 +29,7 @@ public class ToDoController {
 
     @GetMapping
     public ResponseEntity<List<ToDo>> readAllToDos(){
-        return new ResponseEntity<>(toDoService.readAllToDos(), HttpStatus.OK);
+        return new ResponseEntity<>(toDoService.readAllToDos(), HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/{id}")
