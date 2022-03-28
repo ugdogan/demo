@@ -49,23 +49,23 @@ public class ToDoController {
     }
 
     @GetMapping("/done")
-    public List<ToDo> readAllDoneToDos() {
-        return toDoService.readAllDoneToDos();
+    public ResponseEntity<List<ToDo>> readAllDoneToDos() {
+        return new ResponseEntity<>(toDoService.readAllDoneToDos(), HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/notDone")
-    public List<ToDo> readAllNotDoneToDos() {
-        return toDoService.readAllNotDoneToDos();
+    public ResponseEntity<List<ToDo>> readAllNotDoneToDos() {
+        return new ResponseEntity<>(toDoService.readAllNotDoneToDos(), HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/countDone")
-    public Integer countAllDoneToDos() {
-        return toDoService.countAllDoneToDos();
+    public ResponseEntity<Integer> countAllDoneToDos() {
+        return new ResponseEntity<>(toDoService.countAllDoneToDos(), HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/countNotDone")
-    public Integer countAllNotDoneToDos() {
-        return toDoService.countAllNotDoneToDos();
+    public ResponseEntity<Integer> countAllNotDoneToDos() {
+        return new ResponseEntity<>(toDoService.countAllNotDoneToDos(), HttpStatus.ACCEPTED);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
