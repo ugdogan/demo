@@ -23,8 +23,8 @@ public class ToDoController {
     public ToDoServiceImpl toDoService;
 
     @GetMapping("/{id}")
-    public ToDo readToDo(@PathVariable("id") Long id){
-        return toDoService.readToDo(id);
+    public ResponseEntity<List<ToDo>> readToDo(@PathVariable("id") Long id){
+        return new ResponseEntity<>(toDoService.readToDo(id), HttpStatus.ACCEPTED);
     }
 
     @GetMapping

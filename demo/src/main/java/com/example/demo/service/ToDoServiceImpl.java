@@ -6,6 +6,8 @@ import com.example.demo.entity.ToDo;
 import com.example.demo.repository.ToDoRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -20,6 +22,9 @@ public class ToDoServiceImpl implements ToDoService {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    private MessageSource messageSource;
+
     @Override
     public ToDo createToDo(CreateDescriptionDto toDo) {
         return toDoRepository.save(modelMapper.map(toDo, ToDo.class));
@@ -28,7 +33,7 @@ public class ToDoServiceImpl implements ToDoService {
     @Override
     public ToDo updateToDo(UpdateDescriptionDto toDo) {
         ToDo oldToDo = toDoRepository.findById(toDo.getId()).orElseThrow(
-                () -> new EntityNotFoundException("TODO WURDE NICHT GEFUNDEN")
+                () -> new EntityNotFoundException(messageSource.getMessage("toDoNotFound", null, LocaleContextHolder.getLocale()))
         );
         modelMapper.map(toDo, oldToDo);
         return toDoRepository.save(oldToDo);
@@ -40,13 +45,13 @@ public class ToDoServiceImpl implements ToDoService {
     }
 
     @Override
-    public ToDo readToDo(Long id) {
-        return toDoRepository.findById(id).orElse(null);
+    public List<ToDo> readToDo(Long id) {
+        return (List<ToDo>)toDoRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id.toString()));
     }
 
     @Override
     public List<ToDo> readAllToDos() {
-        return (List<ToDo>) toDoRepository.findAll();
+        return (List<ToDo>)toDoRepository.findAll();
     }
 
     @Override
