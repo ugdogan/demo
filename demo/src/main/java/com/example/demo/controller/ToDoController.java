@@ -25,7 +25,7 @@ public class ToDoController {
 
     @MonitorTime
     @GetMapping("/{id}")
-    public ResponseEntity<List<ToDo>> readToDo(@PathVariable("id") Long id){
+    public ResponseEntity<ToDo> readToDo(@PathVariable("id") Long id){
         return new ResponseEntity<>(toDoService.readToDo(id), HttpStatus.ACCEPTED);
     }
 

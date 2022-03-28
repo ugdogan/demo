@@ -45,8 +45,8 @@ public class ToDoServiceImpl implements ToDoService {
     }
 
     @Override
-    public List<ToDo> readToDo(Long id) {
-        return (List<ToDo>)toDoRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id.toString()));
+    public ToDo readToDo(Long id) {
+        return toDoRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id.toString()));
     }
 
     @Override
@@ -56,28 +56,12 @@ public class ToDoServiceImpl implements ToDoService {
 
     @Override
     public List<ToDo> readAllDoneToDos() {
-        List<ToDo> allToDosList = (List<ToDo>) toDoRepository.findAll();
-        List<ToDo> allDoneToDosList = new ArrayList<>();
-        for (int i = 0; i < allToDosList.size(); i++) {
-            ToDo toDo = allToDosList.get(i);
-            if (toDo.getDone() == true) {
-                allDoneToDosList.add(allToDosList.get(i));
-            }
-        }
-        return allDoneToDosList;
+        return (List<ToDo>) toDoRepository.findAllByIsDone(true);
     }
 
     @Override
     public List<ToDo> readAllNotDoneToDos() {
-        List<ToDo> allToDosList = (List<ToDo>) toDoRepository.findAll();
-        List<ToDo> allNotDoneToDosList = new ArrayList<>();
-        for (int i = 0; i < allToDosList.size(); i++) {
-            ToDo toDo = allToDosList.get(i);
-            if (toDo.getDone() == false) {
-                allNotDoneToDosList.add(allToDosList.get(i));
-            }
-        }
-        return allNotDoneToDosList;
+        return (List<ToDo>) toDoRepository.findAllByIsDone(false);
     }
 
     @Override

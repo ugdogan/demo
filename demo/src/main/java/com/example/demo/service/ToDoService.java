@@ -11,7 +11,7 @@ public interface ToDoService {
     public ToDo createToDo(CreateDescriptionDto toDo);
     public ToDo updateToDo(UpdateDescriptionDto toDo);
     public void deleteToDo(Long id);
-    public List<ToDo> readToDo(Long id);
+    public ToDo readToDo(Long id);
     public List<ToDo> readAllToDos();
     public List<ToDo> readAllDoneToDos();
     public List<ToDo> readAllNotDoneToDos();
