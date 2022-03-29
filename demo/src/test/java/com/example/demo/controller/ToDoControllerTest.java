@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.ToDo;
 import com.example.demo.service.ToDoServiceImpl;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,5 +85,33 @@ class ToDoControllerTest {
                             }
                         ]
                         """));
+    }
+
+    @Test
+    void createToDoTest() throws Exception {
+        mvc.perform( MockMvcRequestBuilders
+                .post("/todo")
+                .content(asJsonString(new ToDo(4L, "viertes ToDo", true)))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated());
+        /*
+                .andExpect(content().json("""
+                          {
+                                "id": 4,
+                                "description": "viertes ToDo",
+                                "done": true
+                            }
+                        """));
+
+         */
+    }
+
+    public static String asJsonString(final Object obj) {
+        try {
+            return new ObjectMapper().writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

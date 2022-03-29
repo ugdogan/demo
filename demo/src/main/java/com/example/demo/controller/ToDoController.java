@@ -42,7 +42,7 @@ public class ToDoController {
 
     @PostMapping
     public ResponseEntity<ToDo> createToDo(@Valid @RequestBody CreateDescriptionDto toDo) {
-        return new ResponseEntity<>(toDoService.createToDo(toDo), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(toDoService.createToDo(toDo), HttpStatus.CREATED);
     }
 
     @PutMapping
