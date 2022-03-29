@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.UpdateDescriptionDto;
 import com.example.demo.entity.ToDo;
 import com.example.demo.repository.ToDoRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,10 +13,8 @@ import org.modelmapper.ModelMapper;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.Arrays;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class ToDoServiceTest {
