@@ -52,4 +52,5 @@ public class ToDoServiceTest {
     public void readInvalidToDo() {
         assertThrows(EntityNotFoundException.class, () -> toDoServiceImpl.readToDo(5L));
     }
+
 }
