@@ -105,8 +105,31 @@ class ToDoControllerTest {
                                 "done": true
                             }
                         """));
+    }
 
+    @Test
+    void updateToDoTest() throws Exception {
+        ToDo newToDo = new ToDo(1L, "NEU", true);
+        when(toDoServiceImpl.updateToDo(any())).thenReturn(newToDo);
+        mvc.perform(MockMvcRequestBuilders
+                .put("/todo")
+                .content(asJsonString(new ToDo(1L,"NEU", true)))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                          {
+                                "id": 1,
+                                "description": "NEU",
+                                "done": true
+                            }
+                        """));
+    }
 
+    @Test
+    void deleteToDoTest() throws Exception {
+        mvc.perform( MockMvcRequestBuilders.delete("/todo/{id}", 2))
+                .andExpect(status().isAccepted());
     }
 
     public static String asJsonString(final Object obj) {

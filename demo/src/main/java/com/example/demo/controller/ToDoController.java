@@ -37,7 +37,7 @@ public class ToDoController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteToDo(@PathVariable("id") Long id) {
         toDoService.deleteToDo(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
     @PostMapping
@@ -47,7 +47,7 @@ public class ToDoController {
 
     @PutMapping
     public ResponseEntity<ToDo> updateToDo(@RequestBody UpdateDescriptionDto toDo) {
-        return new ResponseEntity<>(toDoService.updateToDo(toDo), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(toDoService.updateToDo(toDo), HttpStatus.OK);
     }
 
     @GetMapping("/done")
