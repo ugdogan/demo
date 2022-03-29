@@ -26,12 +26,12 @@ public class ToDoController {
     @MonitorTime
     @GetMapping("/{id}")
     public ResponseEntity<ToDo> readToDo(@PathVariable("id") Long id){
-        return new ResponseEntity<>(toDoService.readToDo(id), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(toDoService.readToDo(id), HttpStatus.OK);
     }
 
     @GetMapping
     public ResponseEntity<List<ToDo>> readAllToDos(){
-        return new ResponseEntity<>(toDoService.readAllToDos(), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(toDoService.readAllToDos(), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
