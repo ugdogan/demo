@@ -48,17 +48,17 @@ public class ToDoRepositoryTest {
 
     @Test
     public void findAllByIsDoneTest() {
-        List<ToDo> allToDos = (List<ToDo>) toDoRepository.findAllByIsDone(true);
+        List<ToDo> allDoneToDos = (List<ToDo>) toDoRepository.findAllByIsDone(true);
         Integer amountDoneToDos = 2;
 
-        assertEquals(allToDos.size(), amountDoneToDos);
+        assertEquals(allDoneToDos.size(), amountDoneToDos);
     }
 
     @Test
     public void findAllByIsNotDoneTest() {
-        List<ToDo> allToDos = (List<ToDo>) toDoRepository.findAllByIsDone(false);
-        Integer amountDoneToDos = 1;
+        List<ToDo> allNotDoneToDos = (List<ToDo>) toDoRepository.findAllByIsDone(false);
+        Integer amountNotDoneToDos = 1;
 
-        assertEquals(allToDos.size(), amountDoneToDos);
+        assertEquals(allNotDoneToDos.size(), amountNotDoneToDos);
     }
 }
