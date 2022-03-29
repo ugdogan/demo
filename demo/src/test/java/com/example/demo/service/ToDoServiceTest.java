@@ -25,9 +25,6 @@ public class ToDoServiceTest {
     @InjectMocks
     private ToDoServiceImpl toDoServiceImpl;
 
-    @Spy
-    ModelMapper modelMapper;
-
     @BeforeEach
     public void dataFiller() {
         ToDo toDo1 = new ToDo();
