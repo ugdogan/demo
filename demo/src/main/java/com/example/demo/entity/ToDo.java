@@ -17,6 +17,11 @@ public class ToDo {
     public ToDo() {
     }
 
+    public ToDo(String description, Boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     public ToDo(Long id, String description, Boolean isDone) {
         this.id = id;
         this.description = description;

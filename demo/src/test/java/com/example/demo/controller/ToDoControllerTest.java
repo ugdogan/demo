@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -89,13 +90,14 @@ class ToDoControllerTest {
 
     @Test
     void createToDoTest() throws Exception {
+        ToDo newToDo = new ToDo(4L, "viertes ToDo", true);
+        when(toDoServiceImpl.createToDo(any())).thenReturn(newToDo);
         mvc.perform( MockMvcRequestBuilders
                 .post("/todo")
-                .content(asJsonString(new ToDo(4L, "viertes ToDo", true)))
+                .content(asJsonString(new ToDo("viertes ToDo", true)))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isCreated());
-        /*
+                .andExpect(status().isCreated())
                 .andExpect(content().json("""
                           {
                                 "id": 4,
@@ -104,7 +106,7 @@ class ToDoControllerTest {
                             }
                         """));
 
-         */
+
     }
 
     public static String asJsonString(final Object obj) {
