@@ -1,20 +1,36 @@
 package com.example.demo;
 
+import com.example.demo.entity.Role;
 import com.example.demo.entity.ToDo;
+import com.example.demo.entity.User;
+import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.ToDoRepository;
+import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+
 @Component
-public class DbFilter implements CommandLineRunner {
+public class DbFiller implements CommandLineRunner {
 
     private ToDoRepository toDoRepository;
 
     @Autowired
-    public DbFilter(ToDoRepository toDoRepository) {
+    public DbFiller(ToDoRepository toDoRepository) {
         this.toDoRepository = toDoRepository;
     }
+
+    @Autowired
+    public UserRepository userRepository;
+
+    @Autowired
+    public RoleRepository roleRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) throws Exception {
@@ -41,6 +57,20 @@ public class DbFilter implements CommandLineRunner {
         toDoRepository.save(toDo3);
         toDoRepository.save(toDo4);
         toDoRepository.save(toDo5);
+
+        Role userRole = new Role("ROLE_USER");
+        Role adminRole = new Role("ROLE_ADMIN");
+
+        roleRepository.saveAll(Arrays.asList(userRole, adminRole));
+
+        User admin = new User("admin", passwordEncoder.encode("admin"));
+        admin.addRole(userRole);
+        admin.addRole(adminRole);
+        User user = new User("user", passwordEncoder.encode("user"));
+        user.addRole(userRole);
+
+        userRepository.save(admin);
+        userRepository.save(user);
 
         System.out.println("TEST");
     }
