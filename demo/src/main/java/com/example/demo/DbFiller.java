@@ -34,29 +34,13 @@ public class DbFiller implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        ToDo toDo1 = new ToDo();
-        ToDo toDo2 = new ToDo();
-        ToDo toDo3 = new ToDo();
-        ToDo toDo4 = new ToDo();
-        ToDo toDo5 = new ToDo();
+        ToDo toDo1 = new ToDo("erstes ToDo", true);
+        ToDo toDo2 = new ToDo("zweites ToDo", true);
+        ToDo toDo3 = new ToDo("drittes ToDo", false);
+        ToDo toDo4 = new ToDo("viertes ToDo", true);
+        ToDo toDo5 = new ToDo("fuenftes ToDo", false);
 
-        toDo1.setDescription("erstes ToDo");
-        toDo2.setDescription("zweites ToDo");
-        toDo3.setDescription("drittes ToDo");
-        toDo4.setDescription("viertes ToDo");
-        toDo4.setDescription("fuenftes ToDo");
-
-        toDo1.setDone(true);
-        toDo2.setDone(true);
-        toDo3.setDone(false);
-        toDo4.setDone(true);
-        toDo5.setDone(false);
-
-        toDoRepository.save(toDo1);
-        toDoRepository.save(toDo2);
-        toDoRepository.save(toDo3);
-        toDoRepository.save(toDo4);
-        toDoRepository.save(toDo5);
+        toDoRepository.saveAll(Arrays.asList(toDo1, toDo2, toDo3, toDo4, toDo5));
 
         Role userRole = new Role("ROLE_USER");
         Role adminRole = new Role("ROLE_ADMIN");
@@ -66,6 +50,7 @@ public class DbFiller implements CommandLineRunner {
         User admin = new User("admin", passwordEncoder.encode("admin"));
         admin.addRole(userRole);
         admin.addRole(adminRole);
+
         User user = new User("user", passwordEncoder.encode("user"));
         user.addRole(userRole);
 
