@@ -8,6 +8,7 @@ import com.example.demo.service.ToDoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -23,13 +24,14 @@ public class ToDoController {
     @Autowired
     public ToDoServiceImpl toDoService;
 
-    @MonitorTime
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<ToDo> readToDo(@PathVariable("id") Long id){
         return new ResponseEntity<>(toDoService.readToDo(id), HttpStatus.OK);
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<ToDo>> readAllToDos(){
         return new ResponseEntity<>(toDoService.readAllToDos(), HttpStatus.OK);
     }
