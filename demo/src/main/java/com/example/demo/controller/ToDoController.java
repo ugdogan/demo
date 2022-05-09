@@ -24,13 +24,13 @@ public class ToDoController {
     public ToDoServiceImpl toDoService;
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('todo:read')")
     public ResponseEntity<ToDo> readToDo(@PathVariable("id") Long id){
         return new ResponseEntity<>(toDoService.readToDo(id), HttpStatus.OK);
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('todo:read')")
     public ResponseEntity<List<ToDo>> readAllToDos(){
         return new ResponseEntity<>(toDoService.readAllToDos(), HttpStatus.OK);
     }
