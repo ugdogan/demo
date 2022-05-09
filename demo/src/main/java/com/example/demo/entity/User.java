@@ -1,6 +1,5 @@
 package com.example.demo.entity;
 
-import com.example.demo.enums.Permission;
 import com.example.demo.enums.Role;
 
 import javax.persistence.*;
