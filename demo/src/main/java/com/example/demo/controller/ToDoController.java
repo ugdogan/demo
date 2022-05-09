@@ -36,37 +36,44 @@ public class ToDoController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('todos:delete')")
     public ResponseEntity<Void> deleteToDo(@PathVariable("id") Long id) {
         toDoService.deleteToDo(id);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('todos:write')")
     public ResponseEntity<ToDo> createToDo(@Valid @RequestBody CreateDescriptionDto toDo) {
         return new ResponseEntity<>(toDoService.createToDo(toDo), HttpStatus.CREATED);
     }
 
     @PutMapping
+    @PreAuthorize("hasRole('todos:write')")
     public ResponseEntity<ToDo> updateToDo(@RequestBody UpdateDescriptionDto toDo) {
         return new ResponseEntity<>(toDoService.updateToDo(toDo), HttpStatus.OK);
     }
 
     @GetMapping("/done")
+    @PreAuthorize("hasRole('todos:read')")
     public ResponseEntity<List<ToDo>> readAllDoneToDos() {
         return new ResponseEntity<>(toDoService.readAllDoneToDos(), HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/notDone")
+    @PreAuthorize("hasRole('todos:read')")
     public ResponseEntity<List<ToDo>> readAllNotDoneToDos() {
         return new ResponseEntity<>(toDoService.readAllNotDoneToDos(), HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/countDone")
+    @PreAuthorize("hasRole('todos:read')")
     public ResponseEntity<Integer> countAllDoneToDos() {
         return new ResponseEntity<>(toDoService.countAllDoneToDos(), HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/countNotDone")
+    @PreAuthorize("hasRole('todos:read')")
     public ResponseEntity<Integer> countAllNotDoneToDos() {
         return new ResponseEntity<>(toDoService.countAllNotDoneToDos(), HttpStatus.ACCEPTED);
     }

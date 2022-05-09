@@ -4,6 +4,7 @@ public enum Permission {
 
     TODO_READ("todos:read"),
     TODO_WRITE("todos:write"),
+    TODO_DELETE("todos:delete"),
     USERS_READ("users:read"),
     USERS_WRITE("users:write");
 

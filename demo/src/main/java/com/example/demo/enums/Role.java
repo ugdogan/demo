@@ -10,7 +10,7 @@ import static com.example.demo.enums.Permission.*;
 public enum Role {
 
     USER(Set.of(TODO_READ, TODO_WRITE)),
-    ADMIN(Set.of(TODO_READ, TODO_WRITE, USERS_READ, USERS_WRITE)),
+    ADMIN(Set.of(TODO_READ, TODO_WRITE, TODO_DELETE, USERS_READ, USERS_WRITE)),
     ANALYST(Set.of(TODO_READ, TODO_WRITE, USERS_READ));
 
     private final Set<Permission> permissions;
