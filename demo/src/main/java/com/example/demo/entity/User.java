@@ -22,11 +22,8 @@ public class User {
     @NotEmpty(message = "password is required")
     private String password;
 
-    //@ManyToMany(fetch = FetchType.EAGER)
-    //private Set<Role> roles = new HashSet<>();
-
     @NotEmpty(message = "role is required")
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
 
